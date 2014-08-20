@@ -22,11 +22,11 @@ class Isucon3App < Sinatra::Base
       $config ||= JSON.parse(IO.read(File.dirname(__FILE__) + "/../config/#{ ENV['ISUCON_ENV'] || 'local' }.json"))['database']
       return $mysql if $mysql
       $mysql = Mysql2::Client.new(
-        :host => config['host'],
-        :port => config['port'],
-        :username => config['username'],
-        :password => config['password'],
-        :database => config['dbname'],
+        :host => $config['host'],
+        :port => $config['port'],
+        :username => $config['username'],
+        :password => $config['password'],
+        :database => $config['dbname'],
         :reconnect => true,
       )
     end
