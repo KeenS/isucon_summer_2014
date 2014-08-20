@@ -19,7 +19,7 @@ class Isucon3App < Sinatra::Base
     set :erb, :escape_html => true
 
     def connection
-      config = JSON.parse(IO.read(File.dirname(__FILE__) + "/../config/#{ ENV['ISUCON_ENV'] || 'local' }.json"))['database']
+      $config ||= JSON.parse(IO.read(File.dirname(__FILE__) + "/../config/#{ ENV['ISUCON_ENV'] || 'local' }.json"))['database']
       return $mysql if $mysql
       $mysql = Mysql2::Client.new(
         :host => config['host'],
